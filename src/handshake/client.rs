@@ -64,7 +64,7 @@ impl<S: Read + Write> ClientHandshake<S> {
             ClientHandshake { verify_data: VerifyData { accept_key }, config, _marker: PhantomData }
         };
 
-        trace!("Client handshake initiated.");
+        //trace!("Client handshake initiated.");
         Ok(MidHandshake { role: client, machine })
     }
 }
@@ -132,7 +132,7 @@ fn generate_request(request: Request, key: &str) -> Result<Vec<u8>> {
         writeln!(req, "{}: {}\r", k, v.to_str()?).unwrap();
     }
     writeln!(req, "\r").unwrap();
-    trace!("Request: {:?}", String::from_utf8_lossy(&req));
+    //trace!("Request: {:?}", String::from_utf8_lossy(&req));
     Ok(req)
 }
 

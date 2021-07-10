@@ -212,7 +212,7 @@ impl<S: Read + Write, C: Callback> ServerHandshake<S, C> {
     /// server, you can specify the callback if you want to add additional header to the client
     /// upon join based on the incoming headers.
     pub fn start(stream: S, callback: C, config: Option<WebSocketConfig>) -> MidHandshake<Self> {
-        trace!("Server handshake initiated.");
+        //trace!("Server handshake initiated.");
         MidHandshake {
             machine: HandshakeMachine::start_read(stream),
             role: ServerHandshake {

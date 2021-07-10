@@ -308,7 +308,7 @@ impl WebSocketContext {
             // If we get here, either write blocks or we have nothing to write.
             // Thus if read blocks, just let it return WouldBlock.
             if let Some(message) = self.read_message_frame(stream)? {
-                trace!("Received message {}", message);
+                //trace!("Received message {}", message);
                 return Ok(message);
             }
         }
@@ -374,11 +374,11 @@ impl WebSocketContext {
         // response, unless it already received a Close frame. It SHOULD
         // respond with Pong frame as soon as is practical. (RFC 6455)
         if let Some(pong) = self.pong.take() {
-            trace!("Sending pong reply");
+            //trace!("Sending pong reply");
             self.send_one_frame(stream, pong)?;
         }
         // If we have any unsent frames, send them.
-        trace!("Frames still in queue: {}", self.send_queue.len());
+        //trace!("Frames still in queue: {}", self.send_queue.len());
         while let Some(data) = self.send_queue.pop_front() {
             self.send_one_frame(stream, data)?;
         }
@@ -604,7 +604,7 @@ impl WebSocketContext {
             }
         }
 
-        trace!("Sending frame: {:?}", frame);
+        //trace!("Sending frame: {:?}", frame);
         self.frame.write_frame(stream, frame).check_connection_reset(self.state)
     }
 }

@@ -8,7 +8,7 @@ mod mask;
 
 use std::io::{Error as IoError, ErrorKind as IoErrorKind, Read, Write};
 
-use log::*;
+//use log::*;
 
 pub use self::frame::{CloseFrame, Frame, FrameHeader};
 use crate::{
@@ -153,7 +153,7 @@ impl FrameCodec {
             // Not enough data in buffer.
             let size = self.in_buffer.read_from(stream)?;
             if size == 0 {
-                trace!("no frame received");
+                //trace!("no frame received");
                 return Ok(None);
             }
         };
@@ -161,7 +161,7 @@ impl FrameCodec {
         let (header, length) = self.header.take().expect("Bug: no frame header");
         debug_assert_eq!(payload.len() as u64, length);
         let frame = Frame::from_payload(header, payload);
-        trace!("received frame {}", frame);
+        //trace!("received frame {}", frame);
         Ok(Some(frame))
     }
 
@@ -170,7 +170,7 @@ impl FrameCodec {
     where
         Stream: Write,
     {
-        trace!("writing frame {}", frame);
+        //trace!("writing frame {}", frame);
         self.out_buffer.reserve(frame.len());
         frame.format(&mut self.out_buffer).expect("Bug: can't write to vector");
         self.write_pending(stream)

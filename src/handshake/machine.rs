@@ -1,5 +1,5 @@
 use bytes::Buf;
-use log::*;
+//use log::*;
 use std::io::{Cursor, Read, Write};
 
 use crate::{
@@ -37,7 +37,7 @@ impl<Stream> HandshakeMachine<Stream> {
 impl<Stream: Read + Write> HandshakeMachine<Stream> {
     /// Perform a single handshake round.
     pub fn single_round<Obj: TryParse>(mut self) -> Result<RoundResult<Obj, Stream>> {
-        trace!("Doing handshake round.");
+        //trace!("Doing handshake round.");
         match self.state {
             HandshakeState::Reading(mut buf) => {
                 let read = buf.read_from(&mut self.stream).no_block()?;
